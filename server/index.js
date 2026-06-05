@@ -8,10 +8,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: [
-    'http://localhost:3000',
-    'https://project-france-a4iz.vercel.app'
-  ],
+  origin: true,
   credentials: true
 }));
 
