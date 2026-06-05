@@ -18,16 +18,16 @@ export const AuthProvider = ({ children }) => {
     }
   }, [token]);
 
-  const fetchUser = async () => {
-    try {
-      axios.get(`${API_URL}/api/auth/me`)
-      setUser(data);
-    } catch {
-      logout();
-    } finally {
-      setLoading(false);
-    }
-  };
+ const fetchUser = async () => {
+  try {
+    const { data } = await axios.get(`${API_URL}/api/auth/me`);
+    setUser(data);
+  } catch {
+    logout();
+  } finally {
+    setLoading(false);
+  }
+};
 
   const login = async (email, password) => {
     const { data } = await axios.post(`${API_URL}/api/auth/login`, { email, password });
