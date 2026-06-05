@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
-const API_URL = 'https://project-france.onrender.com';
+axios.defaults.baseURL = 'https://project-france.onrender.com';
 
 const AuthContext = createContext(null);
 
