@@ -2,71 +2,69 @@
 
 /* ── Design Tokens ── */
 :root {
-  /* Parchment & Cream palette */
-  --cream:          #fdf6ec;
-  --parchment:      #f5e6d0;
-  --parchment-dark: #e8d5b5;
-  --linen:          #f0e4d0;
-  --warm-white:     #faf8f4;
+  --cream:          #f5f0e8;
+  --parchment:      #ede8d8;
+  --parchment-dark: #d9d2c0;
+  --linen:          #e8e2d0;
+  --warm-white:     #faf8f2;
 
-  /* Ink & text */
-  --ink:            #2c1f14;
-  --ink-mid:        #5c4033;
-  --ink-light:      #8b6347;
-  --ink-faint:      #c4a882;
+  --ink:            #1a1a1a;
+  --ink-mid:        #3a3a3a;
+  --ink-light:      #6a6a6a;
+  --ink-faint:      #aaaaaa;
 
-  /* Accent — vintage rouge & terracotta */
-  --rouge:          #8b1a1a;
-  --rouge-light:    #b5393a;
-  --rose:           #c8838a;
-  --rose-light:     #e8b4b8;
-  --terracotta:     #c8694a;
-  --peach:          #e8c5a0;
+  --rouge:          #9b1515;
+  --rouge-light:    #b52020;
+  --rose:           #c84040;
+  --rose-light:     #d96060;
+  --terracotta:     #9b1515;
+  --peach:          #e8d8c0;
 
-  /* Muted greens & blues for tags */
-  --sage:           #7a9e7e;
-  --dusty-blue:     #6b8fa8;
-  --slate:          #7b8fa0;
+  --sage:           #4a7a8a;
+  --dusty-blue:     #1a3a8a;
+  --slate:          #4a5a7a;
 
-  /* Surfaces */
-  --surface-0:      #fdf9f4;
-  --surface-1:      #f8f0e4;
-  --surface-2:      #f0e4d0;
-  --surface-card:   #fefaf4;
-  --border:         #e0cdb5;
-  --border-light:   #ede0cc;
+  --surface-0:      #f5f0e8;
+  --surface-1:      #ede8d8;
+  --surface-2:      #e2dcc8;
+  --surface-card:   #faf8f2;
+  --border:         #c8c0a8;
+  --border-light:   #d8d0b8;
 
-  /* Sidebar */
-  --sidebar-bg:     #2c1f14;
-  --sidebar-text:   #f0e4d0;
-  --sidebar-muted:  #a08060;
-  --sidebar-hover:  #3d2d1e;
-  --sidebar-active: #5c3d28;
+  --sidebar-bg:     #f5f0e8;
+  --sidebar-text:   #1a1a1a;
+  --sidebar-muted:  #6a6a6a;
+  --sidebar-hover:  #e2dcc8;
+  --sidebar-active: #d8d0b8;
 
-  /* Fonts */
   --font-display:   'Cormorant Garamond', 'EB Garamond', Georgia, serif;
   --font-body:      'Libre Baskerville', Georgia, serif;
   --font-script:    'Dancing Script', cursive;
   --font-mono:      'Courier Prime', 'Courier New', monospace;
 
-  /* Shadows */
-  --shadow-sm:      0 1px 3px rgba(44, 31, 20, 0.08);
-  --shadow-md:      0 4px 12px rgba(44, 31, 20, 0.12);
-  --shadow-lg:      0 8px 24px rgba(44, 31, 20, 0.16);
-  --shadow-paper:   2px 4px 16px rgba(44, 31, 20, 0.14);
+  --shadow-sm:      0 1px 3px rgba(26, 26, 26, 0.08);
+  --shadow-md:      0 4px 12px rgba(26, 26, 26, 0.10);
+  --shadow-lg:      0 8px 24px rgba(26, 26, 26, 0.14);
+  --shadow-paper:   2px 4px 16px rgba(26, 26, 26, 0.10);
 
-  /* Radii */
   --radius-sm:      4px;
   --radius-md:      8px;
   --radius-lg:      12px;
 
-  /* Layout */
   --sidebar-width:  260px;
+
+  /* Airmail stripe — used everywhere */
+  --airmail-stripe: repeating-linear-gradient(
+    -45deg,
+    #9b1515 0px,  #9b1515 10px,
+    #f5f0e8 10px, #f5f0e8 20px,
+    #1a3a8a 20px, #1a3a8a 30px,
+    #f5f0e8 30px, #f5f0e8 40px
+  );
 }
 
 /* ── Reset & Base ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 html { font-size: 16px; scroll-behavior: smooth; }
 
 body {
@@ -75,8 +73,10 @@ body {
   color: var(--ink);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  background-image:
-    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c4a882' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  /* Subtle postage-paper dot pattern */
+  background-image: radial-gradient(circle, #c8c0a8 1px, transparent 1px);
+  background-size: 28px 28px;
+  background-attachment: fixed;
 }
 
 /* ── App Layout ── */
@@ -90,6 +90,8 @@ body {
   margin-left: var(--sidebar-width);
   min-height: 100vh;
   background: var(--surface-0);
+  background-image: radial-gradient(circle, #c8c0a8 1px, transparent 1px);
+  background-size: 28px 28px;
   transition: margin-left 0.3s ease;
 }
 
@@ -106,34 +108,75 @@ body {
   width: var(--sidebar-width);
   height: 100vh;
   background: var(--sidebar-bg);
+  border-right: 6px solid transparent;
+  border-image: var(--airmail-stripe) 6;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
   z-index: 100;
-  box-shadow: 4px 0 20px rgba(0,0,0,0.25);
+  box-shadow: 2px 0 16px rgba(0,0,0,0.08);
 }
 
 .sidebar::-webkit-scrollbar { width: 4px; }
 .sidebar::-webkit-scrollbar-track { background: transparent; }
-.sidebar::-webkit-scrollbar-thumb { background: var(--sidebar-active); border-radius: 2px; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--parchment-dark); border-radius: 2px; }
 
 .sidebar-header {
   padding: 1.75rem 1.5rem 1.25rem;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid var(--border-light);
+  position: relative;
+}
+
+/* Eiffel Tower behind the brand name using CSS + unicode SVG */
+.sidebar-header::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 1rem;
+  width: 60px;
+  height: 80px;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 160' fill='%231a1a1a'%3E%3Cpolygon points='50,0 42,40 58,40'/%3E%3Crect x='44' y='38' width='12' height='6'/%3E%3Cpolygon points='42,44 30,100 70,100 58,44'/%3E%3Crect x='32' y='68' width='36' height='5'/%3E%3Crect x='28' y='98' width='44' height='6'/%3E%3Cpolygon points='30,104 10,160 90,160 70,104'/%3E%3Crect x='14' y='130' width='72' height='6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+  pointer-events: none;
+}
+
+/* Postmark stamp in sidebar header */
+.sidebar-header::after {
+  content: 'PARIS';
+  position: absolute;
+  top: 1.25rem;
+  right: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.15em;
+  color: var(--rouge);
+  opacity: 0.4;
+  border: 1.5px solid var(--rouge);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1;
+  padding: 4px;
 }
 
 .sidebar-brand {
   font-family: var(--font-script);
   font-size: 1.75rem;
-  color: var(--parchment);
+  color: var(--rouge);
   letter-spacing: 0.02em;
   line-height: 1.2;
 }
 
 .sidebar-tagline {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--sidebar-muted);
+  font-size: 0.6rem;
+  color: var(--ink-faint);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   margin-top: 0.25rem;
@@ -141,24 +184,38 @@ body {
 
 .sidebar-departure {
   margin-top: 1rem;
-  background: rgba(255,255,255,0.06);
+  background: rgba(155, 21, 21, 0.06);
+  border: 1px solid rgba(155, 21, 21, 0.15);
   border-radius: var(--radius-md);
   padding: 0.75rem;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Little stamp corner on departure card */
+.sidebar-departure::after {
+  content: '🗼';
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.25rem;
+  font-size: 1.5rem;
+  opacity: 0.12;
+  pointer-events: none;
 }
 
 .departure-days {
   font-family: var(--font-display);
   font-size: 2rem;
   font-weight: 600;
-  color: var(--rose-light);
+  color: var(--rouge);
   line-height: 1;
 }
 
 .departure-label {
   font-family: var(--font-mono);
   font-size: 0.6rem;
-  color: var(--sidebar-muted);
+  color: var(--ink-faint);
   text-transform: uppercase;
   letter-spacing: 0.1em;
   margin-top: 0.2rem;
@@ -172,7 +229,7 @@ body {
 .nav-section-label {
   font-family: var(--font-mono);
   font-size: 0.58rem;
-  color: var(--sidebar-muted);
+  color: var(--ink-faint);
   text-transform: uppercase;
   letter-spacing: 0.15em;
   padding: 0.75rem 1.5rem 0.25rem;
@@ -183,41 +240,36 @@ body {
   align-items: center;
   gap: 0.75rem;
   padding: 0.55rem 1.5rem;
-  color: var(--sidebar-text);
+  color: var(--ink-mid);
   text-decoration: none;
   font-family: var(--font-body);
   font-size: 0.82rem;
   border-left: 3px solid transparent;
   transition: all 0.2s ease;
   cursor: pointer;
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
 .nav-item:hover {
   background: var(--sidebar-hover);
-  border-left-color: var(--rose);
+  border-left-color: var(--rouge);
   opacity: 1;
 }
 
 .nav-item.active {
   background: var(--sidebar-active);
-  border-left-color: var(--rose-light);
+  border-left-color: var(--rouge);
   opacity: 1;
-  color: var(--cream);
+  color: var(--rouge);
+  font-style: italic;
 }
 
-.nav-item .nav-icon {
-  width: 16px;
-  height: 16px;
-  flex-shrink: 0;
-  opacity: 0.75;
-}
-
+.nav-item .nav-icon { width: 16px; height: 16px; flex-shrink: 0; opacity: 0.75; }
 .nav-item.active .nav-icon { opacity: 1; }
 
 .sidebar-footer {
   padding: 1rem 1.5rem;
-  border-top: 1px solid rgba(255,255,255,0.08);
+  border-top: 1px solid var(--border-light);
 }
 
 /* ── Typography ── */
@@ -263,11 +315,27 @@ body {
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 3px;
-  background: linear-gradient(90deg, var(--terracotta), var(--rose), var(--peach));
-  opacity: 0.6;
+  background: var(--rouge);
+  opacity: 0.25;
+}
+
+/* Faint Eiffel Tower watermark on every card */
+.card::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  right: -10px;
+  width: 80px;
+  height: 100px;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 160' fill='%231a1a1a'%3E%3Cpolygon points='50,0 42,40 58,40'/%3E%3Crect x='44' y='38' width='12' height='6'/%3E%3Cpolygon points='42,44 30,100 70,100 58,44'/%3E%3Crect x='32' y='68' width='36' height='5'/%3E%3Crect x='28' y='98' width='44' height='6'/%3E%3Cpolygon points='30,104 10,160 90,160 70,104'/%3E%3Crect x='14' y='130' width='72' height='6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+  pointer-events: none;
 }
 
 .card-body { padding: 1.5rem; }
+
 .card-header {
   padding: 1.25rem 1.5rem;
   border-bottom: 1px solid var(--border-light);
@@ -291,24 +359,13 @@ body {
   text-decoration: none;
 }
 
-.btn-primary {
-  background: var(--rouge);
-  color: var(--cream);
-}
+.btn-primary { background: var(--rouge); color: var(--cream); }
 .btn-primary:hover { background: var(--rouge-light); transform: translateY(-1px); box-shadow: var(--shadow-md); }
 
-.btn-secondary {
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--ink-mid);
-}
+.btn-secondary { background: transparent; border: 1px solid var(--border); color: var(--ink-mid); }
 .btn-secondary:hover { background: var(--surface-2); }
 
-.btn-ghost {
-  background: transparent;
-  color: var(--ink-light);
-  padding: 0.35rem 0.75rem;
-}
+.btn-ghost { background: transparent; color: var(--ink-light); padding: 0.35rem 0.75rem; }
 .btn-ghost:hover { background: var(--surface-2); color: var(--ink); }
 
 .btn-sm { padding: 0.35rem 0.75rem; font-size: 0.775rem; }
@@ -346,7 +403,7 @@ body {
 .form-select:focus,
 .form-textarea:focus {
   border-color: var(--rouge);
-  box-shadow: 0 0 0 3px rgba(139, 26, 26, 0.1);
+  box-shadow: 0 0 0 3px rgba(155, 21, 21, 0.1);
 }
 
 .form-textarea { resize: vertical; min-height: 100px; }
@@ -362,7 +419,7 @@ body {
 .progress-bar-fill {
   height: 100%;
   border-radius: 999px;
-  background: linear-gradient(90deg, var(--terracotta), var(--rose));
+  background: var(--rouge);
   transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -379,11 +436,11 @@ body {
   font-weight: 500;
 }
 
-.badge-rouge    { background: rgba(139,26,26,0.12);  color: var(--rouge); }
-.badge-sage     { background: rgba(122,158,126,0.15); color: #4a7a4e; }
-.badge-blue     { background: rgba(107,143,168,0.15); color: #4a7098; }
-.badge-peach    { background: rgba(232,197,160,0.4);  color: #8b5a2b; }
-.badge-neutral  { background: var(--parchment-dark);  color: var(--ink-mid); }
+.badge-rouge   { background: rgba(155,21,21,0.12);  color: var(--rouge); }
+.badge-sage    { background: rgba(74,122,138,0.15); color: #2a6a7a; }
+.badge-blue    { background: rgba(26,58,138,0.12);  color: #1a3a8a; }
+.badge-peach   { background: rgba(232,216,192,0.6); color: #6a4a2a; }
+.badge-neutral { background: var(--parchment-dark); color: var(--ink-mid); }
 
 /* ── Checkbox ── */
 .custom-checkbox {
@@ -399,16 +456,12 @@ body {
   transition: all 0.15s ease;
 }
 
-.custom-checkbox:checked {
-  background: var(--rouge);
-  border-color: var(--rouge);
-}
+.custom-checkbox:checked { background: var(--rouge); border-color: var(--rouge); }
 
 .custom-checkbox:checked::after {
   content: '✓';
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 50%; left: 50%;
   transform: translate(-50%, -50%);
   color: white;
   font-size: 11px;
@@ -419,7 +472,7 @@ body {
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(44, 31, 20, 0.5);
+  background: rgba(26, 26, 26, 0.4);
   backdrop-filter: blur(4px);
   z-index: 200;
   display: flex;
@@ -438,6 +491,7 @@ body {
   max-height: 90vh;
   overflow-y: auto;
   animation: slideUp 0.2s ease;
+  border: 1px solid var(--border-light);
 }
 
 .modal-header {
@@ -449,6 +503,7 @@ body {
 }
 
 .modal-body { padding: 1.5rem; }
+
 .modal-footer {
   padding: 1rem 1.5rem;
   border-top: 1px solid var(--border-light);
@@ -457,7 +512,7 @@ body {
   justify-content: flex-end;
 }
 
-/* ── Decorative elements ── */
+/* ── Stamp ── */
 .stamp {
   display: inline-flex;
   align-items: center;
@@ -483,6 +538,37 @@ body {
 
 .stamp-rouge { border-color: var(--rouge); color: var(--rouge); }
 
+/* ── Postmark decoration ── */
+.postmark {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border: 2px solid var(--rouge);
+  border-radius: 50%;
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--rouge);
+  opacity: 0.6;
+  position: relative;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.postmark::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1px solid var(--rouge);
+  border-radius: 50%;
+  opacity: 0.4;
+}
+
+/* ── Divider ── */
 .divider-ornament {
   display: flex;
   align-items: center;
@@ -500,82 +586,59 @@ body {
   background: var(--border-light);
 }
 
-/* ── Animations ── */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.animate-in {
-  animation: fadeInUp 0.4s ease forwards;
-}
-
-/* ── Utility ── */
-.flex          { display: flex; }
-.flex-col      { flex-direction: column; }
-.items-center  { align-items: center; }
-.items-start   { align-items: flex-start; }
-.justify-between { justify-content: space-between; }
-.justify-center  { justify-content: center; }
-.gap-1         { gap: 0.25rem; }
-.gap-2         { gap: 0.5rem; }
-.gap-3         { gap: 0.75rem; }
-.gap-4         { gap: 1rem; }
-.gap-6         { gap: 1.5rem; }
-.w-full        { width: 100%; }
-.text-sm       { font-size: 0.875rem; }
-.text-xs       { font-size: 0.75rem; }
-.text-muted    { color: var(--ink-light); }
-.text-faint    { color: var(--ink-faint); }
-.font-script   { font-family: var(--font-script); }
-.font-display  { font-family: var(--font-display); }
-.font-mono     { font-family: var(--font-mono); }
-.mt-1  { margin-top: 0.25rem; }
-.mt-2  { margin-top: 0.5rem; }
-.mt-3  { margin-top: 0.75rem; }
-.mt-4  { margin-top: 1rem; }
-.mt-6  { margin-top: 1.5rem; }
-.mb-1  { margin-bottom: 0.25rem; }
-.mb-2  { margin-bottom: 0.5rem; }
-.mb-3  { margin-bottom: 0.75rem; }
-.mb-4  { margin-bottom: 1rem; }
-.mb-6  { margin-bottom: 1.5rem; }
-.p-4   { padding: 1rem; }
-.p-6   { padding: 1.5rem; }
-.truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.grid  { display: grid; }
-.grid-2 { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-.grid-3 { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-.cursor-pointer { cursor: pointer; }
-.line-through { text-decoration: line-through; opacity: 0.5; }
-.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
-
-/* ── Scrollbar ── */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--parchment-dark); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--ink-faint); }
-
 /* ── Auth pages ── */
 .auth-page {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--surface-1);
-  background-image:
-    url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23c4a882' fill-opacity='0.06'%3E%3Cpath d='M50 50c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10zM10 10c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10S0 25.523 0 20s4.477-10 10-10z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background: var(--cream);
   padding: 2rem;
+  position: relative;
+  /* Airmail border around entire page */
+  border: 14px solid transparent;
+  border-image: var(--airmail-stripe) 14;
+}
+
+/* Large faint Eiffel Tower behind auth form */
+.auth-page::before {
+  content: '';
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  height: 420px;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 160' fill='%231a1a1a'%3E%3Cpolygon points='50,0 42,40 58,40'/%3E%3Crect x='44' y='38' width='12' height='6'/%3E%3Cpolygon points='42,44 30,100 70,100 58,44'/%3E%3Crect x='32' y='68' width='36' height='5'/%3E%3Crect x='28' y='98' width='44' height='6'/%3E%3Cpolygon points='30,104 10,160 90,160 70,104'/%3E%3Crect x='14' y='130' width='72' height='6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Postmark stamp top-right of auth page */
+.auth-page::after {
+  content: 'PARIS · MADE WITH LOVE';
+  position: fixed;
+  top: 2.5rem;
+  right: 2.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.12em;
+  color: var(--rouge);
+  opacity: 0.5;
+  border: 2px solid var(--rouge);
+  border-radius: 50%;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.4;
+  padding: 8px;
+  pointer-events: none;
 }
 
 .auth-card {
@@ -586,16 +649,44 @@ body {
   max-width: 440px;
   padding: 2.5rem;
   border: 1px solid var(--border-light);
+  position: relative;
+  z-index: 1;
+}
+
+/* Stamp images top-left of auth card */
+.auth-card::before {
+  content: '';
+  position: absolute;
+  top: -18px;
+  left: 1.5rem;
+  width: 52px;
+  height: 44px;
+  background:
+    linear-gradient(135deg, #3a6a3a 0%, #5a8a5a 100%);
+  border: 2px solid var(--border);
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.15);
+  border-radius: 2px;
+}
+
+.auth-card::after {
+  content: '🗼';
+  position: absolute;
+  top: -14px;
+  left: 1.6rem;
+  font-size: 1.5rem;
+  filter: grayscale(1) opacity(0.7);
+  pointer-events: none;
 }
 
 .auth-brand {
   text-align: center;
   margin-bottom: 2rem;
+  padding-top: 0.5rem;
 }
 
 .auth-title {
   font-family: var(--font-script);
-  font-size: 2.75rem;
+  font-size: 3rem;
   color: var(--rouge);
   line-height: 1.1;
 }
@@ -616,11 +707,7 @@ body {
   color: var(--ink-faint);
 }
 
-.empty-state-icon {
-  font-size: 2.5rem;
-  margin-bottom: 0.75rem;
-  opacity: 0.6;
-}
+.empty-state-icon { font-size: 2.5rem; margin-bottom: 0.75rem; opacity: 0.6; }
 
 .empty-state-text {
   font-family: var(--font-display);
@@ -654,8 +741,72 @@ body {
   max-width: 320px;
 }
 
-.toast.success { border-left: 3px solid var(--sage); }
-.toast.error   { border-left: 3px solid var(--rouge-light); }
+.toast.success { border-left: 3px solid #4a8a5a; }
+.toast.error   { border-left: 3px solid var(--rouge); }
+
+/* ── Animations ── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-in { animation: fadeInUp 0.4s ease forwards; }
+
+/* ── Utility ── */
+.flex          { display: flex; }
+.flex-col      { flex-direction: column; }
+.items-center  { align-items: center; }
+.items-start   { align-items: flex-start; }
+.justify-between { justify-content: space-between; }
+.justify-center  { justify-content: center; }
+.gap-1  { gap: 0.25rem; }
+.gap-2  { gap: 0.5rem; }
+.gap-3  { gap: 0.75rem; }
+.gap-4  { gap: 1rem; }
+.gap-6  { gap: 1.5rem; }
+.w-full { width: 100%; }
+.text-sm    { font-size: 0.875rem; }
+.text-xs    { font-size: 0.75rem; }
+.text-muted { color: var(--ink-light); }
+.text-faint { color: var(--ink-faint); }
+.font-script  { font-family: var(--font-script); }
+.font-display { font-family: var(--font-display); }
+.font-mono    { font-family: var(--font-mono); }
+.mt-1 { margin-top: 0.25rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 0.75rem; }
+.mt-4 { margin-top: 1rem; }
+.mt-6 { margin-top: 1.5rem; }
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 0.75rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-6 { margin-bottom: 1.5rem; }
+.p-4  { padding: 1rem; }
+.p-6  { padding: 1.5rem; }
+.truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.grid   { display: grid; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+.grid-3 { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.cursor-pointer { cursor: pointer; }
+.line-through   { text-decoration: line-through; opacity: 0.5; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--parchment-dark); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--ink-faint); }
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
