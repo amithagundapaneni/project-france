@@ -51,30 +51,39 @@ export default function Analytics() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-  Promise.all([
-    axios.get('/api/checklist'),
-    axios.get('/api/packing'),
-    axios.get('/api/shopping'),
-    axios.get('/api/goals'),
-    axios.get('/api/french/vocabulary'),
-    axios.get('/api/bucketlist'),
-    axios.get('/api/journal'),
-    axios.get('/api/meals/recipes'),
-    axios.get('/api/notes'),
-  ]).then(([c, p, s, g, v, b, j, m, n]) => {
-    setData({
-      checklist: Array.isArray(c.data) ? c.data : [],
-      packing:   Array.isArray(p.data) ? p.data : [],
-      shopping:  Array.isArray(s.data) ? s.data : [],
-      goals:     Array.isArray(g.data) ? g.data : [],
-      vocab:     Array.isArray(v.data) ? v.data : [],
-      bucket:    Array.isArray(b.data) ? b.data : [],
-      journal:   Array.isArray(j.data) ? j.data : [],
-      meals:     Array.isArray(m.data) ? m.data : [],
-      notes:     Array.isArray(n.data) ? n.data : [],
-    });
-  }).finally(() => setLoading(false));
-}, []);
+    Promise.all([
+      axios.get('/api/checklist'),
+      axios.get('/api/packing'),
+      axios.get('/api/shopping'),
+      axios.get('/api/goals'),
+      axios.get('/api/french/vocabulary'),
+      axios.get('/api/bucketlist'),
+      axios.get('/api/journal'),
+      axios.get('/api/meals/recipes'),
+      axios.get('/api/notes'),
+    ]).then(([c, p, s, g, v, b, j, m, n]) => {
+      setData({
+        checklist: Array.isArray(c.data) ? c.data : [],
+        packing:   Array.isArray(p.data) ? p.data : [],
+        shopping:  Array.isArray(s.data) ? s.data : [],
+        goals:     Array.isArray(g.data) ? g.data : [],
+        vocab:     Array.isArray(v.data) ? v.data : [],
+        bucket:    Array.isArray(b.data) ? b.data : [],
+        journal:   Array.isArray(j.data) ? j.data : [],
+        meals:     Array.isArray(m.data) ? m.data : [],
+        notes:     Array.isArray(n.data) ? n.data : [],
+      });
+    }).catch(() => {
+      setData({ checklist: [], packing: [], shopping: [], goals: [], vocab: [], bucket: [], journal: [], meals: [], notes: [] });
+    }).finally(() => setLoading(false));
+  }, []);
+
+  if (loading || !data) return (
+    <div className="empty-state" style={{ paddingTop: '4rem' }}>
+      <div className="empty-state-icon">📊</div>
+      <div className="empty-state-text">Gathering your stats...</div>
+    </div>
+  );
 
   const { checklist, packing, shopping, goals, vocab, bucket, journal, meals, notes } = data;
 
@@ -94,11 +103,11 @@ export default function Analytics() {
 
   // Radial chart data
   const radialData = [
-    { name: 'Checklist',  value: checklist.length ? Math.round((checklist.filter(i => i.completed).length / checklist.length) * 100) : 0, fill: '#8b1a1a' },
-    { name: 'Packing',    value: packing.length   ? Math.round((packing.filter(i => i.packed).length / packing.length) * 100) : 0,     fill: '#c8956c' },
-    { name: 'Shopping',   value: shopping.length  ? Math.round((shopping.filter(i => i.purchased).length / shopping.length) * 100) : 0, fill: '#b5838d' },
-    { name: 'Vocab',      value: vocab.length     ? Math.round((vocab.filter(i => i.mastered).length / vocab.length) * 100) : 0,       fill: '#6b8fa8' },
-    { name: 'Bucket List',value: bucket.length    ? Math.round((bucket.filter(i => i.completed).length / bucket.length) * 100) : 0,    fill: '#7a9e7e' },
+    { name: 'Checklist',   value: checklist.length ? Math.round((checklist.filter(i => i.completed).length / checklist.length) * 100) : 0, fill: '#8b1a1a' },
+    { name: 'Packing',     value: packing.length   ? Math.round((packing.filter(i => i.packed).length / packing.length) * 100) : 0,       fill: '#c8956c' },
+    { name: 'Shopping',    value: shopping.length  ? Math.round((shopping.filter(i => i.purchased).length / shopping.length) * 100) : 0,  fill: '#b5838d' },
+    { name: 'Vocab',       value: vocab.length     ? Math.round((vocab.filter(i => i.mastered).length / vocab.length) * 100) : 0,         fill: '#6b8fa8' },
+    { name: 'Bucket List', value: bucket.length    ? Math.round((bucket.filter(i => i.completed).length / bucket.length) * 100) : 0,      fill: '#7a9e7e' },
   ];
 
   // Goals by category
@@ -178,10 +187,10 @@ export default function Analytics() {
         <StatCard title="Bucket Items" emoji="🗼" value={`${bucket.filter(i => i.completed).length}/${bucket.length}`}      color="var(--sage)"       />
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem', marginBottom: '2rem' }}>
-        <StatCard title="Goals Active" emoji="🎯" value={goals.length}     color="var(--rose)"        />
-        <StatCard title="Recipes"      emoji="🥐" value={meals.length}     color="var(--terracotta)"  />
+        <StatCard title="Goals Active"    emoji="🎯" value={goals.length}   color="var(--rose)"       />
+        <StatCard title="Recipes"         emoji="🥐" value={meals.length}   color="var(--terracotta)" />
         <StatCard title="Journal Entries" emoji="📓" value={journal.length} color="var(--ink-mid)"    />
-        <StatCard title="Notes Saved"  emoji="📌" value={notes.length}     color="var(--dusty-blue)"  />
+        <StatCard title="Notes Saved"     emoji="📌" value={notes.length}   color="var(--dusty-blue)" />
       </div>
 
       {/* All progress bars */}
@@ -189,16 +198,15 @@ export default function Analytics() {
         <div className="card">
           <div className="card-header"><h3 className="section-title" style={{ fontSize: '1rem' }}>Section Progress</h3></div>
           <div className="card-body">
-            <SectionProgress title="Pre-Departure"   emoji="📋" done={checklist.filter(i => i.completed).length} total={checklist.length} color="var(--rouge)"      />
-            <SectionProgress title="Packing"         emoji="🧳" done={packing.filter(i => i.packed).length}     total={packing.length}   color="var(--terracotta)" />
-            <SectionProgress title="Shopping"        emoji="🛍" done={shopping.filter(i => i.purchased).length} total={shopping.length}  color="var(--rose)"       />
-            <SectionProgress title="Summer Goals"    emoji="🎯" done={goals.filter(g => g.progress >= 80).length} total={goals.length}   color="var(--sage)"       />
-            <SectionProgress title="French Vocab"    emoji="🗣" done={vocab.filter(v => v.mastered).length}     total={vocab.length}     color="var(--dusty-blue)" />
-            <SectionProgress title="Bucket List"     emoji="🗼" done={bucket.filter(b => b.completed).length}   total={bucket.length}    color="var(--ink-mid)"    />
+            <SectionProgress title="Pre-Departure" emoji="📋" done={checklist.filter(i => i.completed).length} total={checklist.length} color="var(--rouge)"      />
+            <SectionProgress title="Packing"       emoji="🧳" done={packing.filter(i => i.packed).length}     total={packing.length}   color="var(--terracotta)" />
+            <SectionProgress title="Shopping"      emoji="🛍" done={shopping.filter(i => i.purchased).length} total={shopping.length}  color="var(--rose)"       />
+            <SectionProgress title="Summer Goals"  emoji="🎯" done={goals.filter(g => g.progress >= 80).length} total={goals.length}   color="var(--sage)"       />
+            <SectionProgress title="French Vocab"  emoji="🗣" done={vocab.filter(v => v.mastered).length}     total={vocab.length}     color="var(--dusty-blue)" />
+            <SectionProgress title="Bucket List"   emoji="🗼" done={bucket.filter(b => b.completed).length}   total={bucket.length}    color="var(--ink-mid)"    />
           </div>
         </div>
 
-        {/* Radial chart */}
         <div className="card">
           <div className="card-header"><h3 className="section-title" style={{ fontSize: '1rem' }}>Progress Radials</h3></div>
           <div className="card-body" style={{ height: 280 }}>
@@ -214,7 +222,6 @@ export default function Analytics() {
         </div>
       </div>
 
-      {/* Goals by Category */}
       {goalsByCat.length > 0 && (
         <div className="card mb-5">
           <div className="card-header"><h3 className="section-title" style={{ fontSize: '1rem' }}>Goals by Category — Avg Progress</h3></div>
@@ -234,7 +241,6 @@ export default function Analytics() {
       )}
 
       <div className="grid-2 mb-5">
-        {/* Packing by category */}
         {packingByCat.length > 0 && (
           <div className="card">
             <div className="card-header"><h3 className="section-title" style={{ fontSize: '1rem' }}>Packing by Category</h3></div>
@@ -252,7 +258,6 @@ export default function Analytics() {
           </div>
         )}
 
-        {/* Vocab pie chart */}
         {vocabPieData.length > 0 && (
           <div className="card">
             <div className="card-header"><h3 className="section-title" style={{ fontSize: '1rem' }}>Vocabulary by Category</h3></div>
@@ -271,7 +276,6 @@ export default function Analytics() {
         )}
       </div>
 
-      {/* Budget + Mood */}
       <div className="grid-2 mb-5">
         <div className="card">
           <div className="card-header"><h3 className="section-title" style={{ fontSize: '1rem' }}>Shopping Budget</h3></div>
@@ -311,7 +315,6 @@ export default function Analytics() {
         )}
       </div>
 
-      {/* Encouragement */}
       <div className="card" style={{ background: 'var(--surface-1)', textAlign: 'center' }}>
         <div className="card-body">
           <div style={{ fontFamily: 'var(--font-script)', fontSize: '1.5rem', color: 'var(--rouge)', marginBottom: '0.5rem' }}>
@@ -319,10 +322,10 @@ export default function Analytics() {
           </div>
           <div className="text-sm text-muted" style={{ fontFamily: 'var(--font-body)', fontStyle: 'italic' }}>
             {readinessScore >= 80
-              ? 'You\'re almost fully prepared for your French adventure. Félicitations!'
+              ? "You're almost fully prepared for your French adventure. Félicitations!"
               : readinessScore >= 50
-              ? 'You\'ve made great progress. Keep ticking off those tasks!'
-              : 'Don\'t worry — every journey starts with a single step. You\'ve got this!'}
+              ? "You've made great progress. Keep ticking off those tasks!"
+              : "Don't worry — every journey starts with a single step. You've got this!"}
           </div>
         </div>
       </div>
