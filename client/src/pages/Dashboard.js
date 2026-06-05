@@ -64,17 +64,25 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    Promise.all([
-      axios.get('/api/checklist'),
-      axios.get('/api/packing'),
-      axios.get('/api/shopping'),
-      axios.get('/api/goals'),
-      axios.get('/api/french/vocabulary'),
-      axios.get('/api/bucketlist'),
-    ]).then(([c, p, s, g, v, b]) => {
-      setData({ checklist: c.data, packing: p.data, shopping: s.data, goals: g.data, vocab: v.data, bucket: b.data });
-    }).finally(() => setLoading(false));
-  }, []);
+  const safe = (res) => (Array.isArray(res?.value?.data) ? res.value.data : []);
+  Promise.allSettled([
+    axios.get('/api/checklist'),
+    axios.get('/api/packing'),
+    axios.get('/api/shopping'),
+    axios.get('/api/goals'),
+    axios.get('/api/french/vocabulary'),
+    axios.get('/api/bucketlist'),
+  ]).then(([c, p, s, g, v, b]) => {
+    setData({
+      checklist: safe(c),
+      packing:   safe(p),
+      shopping:  safe(s),
+      goals:     safe(g),
+      vocab:     safe(v),
+      bucket:    safe(b),
+    });
+  }).finally(() => setLoading(false));
+}, []);
 
   const daysLeft = useMemo(() => {
     if (!user?.departureDate) return null;

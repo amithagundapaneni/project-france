@@ -51,27 +51,25 @@ export default function Analytics() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    Promise.all([
-      axios.get('/api/checklist'),
-      axios.get('/api/packing'),
-      axios.get('/api/shopping'),
-      axios.get('/api/goals'),
-      axios.get('/api/french/vocabulary'),
-      axios.get('/api/bucketlist'),
-      axios.get('/api/journal'),
-      axios.get('/api/meals/recipes'),
-      axios.get('/api/notes'),
-    ]).then(([c, p, s, g, v, b, j, m, n]) => {
-      setData({ checklist: c.data, packing: p.data, shopping: s.data, goals: g.data, vocab: v.data, bucket: b.data, journal: j.data, meals: m.data, notes: n.data });
-    }).finally(() => setLoading(false));
-  }, []);
-
-  if (loading) return (
-    <div className="empty-state" style={{ paddingTop: '4rem' }}>
-      <div className="empty-state-icon">📊</div>
-      <div className="empty-state-text">Gathering your stats...</div>
-    </div>
-  );
+  const safe = (res) => (Array.isArray(res?.value?.data) ? res.value.data : []);
+  Promise.allSettled([
+    axios.get('/api/checklist'),
+    axios.get('/api/packing'),
+    axios.get('/api/shopping'),
+    axios.get('/api/goals'),
+    axios.get('/api/french/vocabulary'),
+    axios.get('/api/bucketlist'),
+    axios.get('/api/journal'),
+    axios.get('/api/meals/recipes'),
+    axios.get('/api/notes'),
+  ]).then(([c, p, s, g, v, b, j, m, n]) => {
+    setData({
+      checklist: safe(c), packing: safe(p), shopping: safe(s),
+      goals:     safe(g), vocab:   safe(v), bucket:   safe(b),
+      journal:   safe(j), meals:   safe(m), notes:    safe(n),
+    });
+  }).finally(() => setLoading(false));
+}, []);
 
   const { checklist, packing, shopping, goals, vocab, bucket, journal, meals, notes } = data;
 
