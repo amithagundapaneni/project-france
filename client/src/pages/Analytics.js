@@ -51,8 +51,7 @@ export default function Analytics() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-  const safe = (res) => (Array.isArray(res?.value?.data) ? res.value.data : []);
-  Promise.allSettled([
+  Promise.all([
     axios.get('/api/checklist'),
     axios.get('/api/packing'),
     axios.get('/api/shopping'),
@@ -64,9 +63,15 @@ export default function Analytics() {
     axios.get('/api/notes'),
   ]).then(([c, p, s, g, v, b, j, m, n]) => {
     setData({
-      checklist: safe(c), packing: safe(p), shopping: safe(s),
-      goals:     safe(g), vocab:   safe(v), bucket:   safe(b),
-      journal:   safe(j), meals:   safe(m), notes:    safe(n),
+      checklist: Array.isArray(c.data) ? c.data : [],
+      packing:   Array.isArray(p.data) ? p.data : [],
+      shopping:  Array.isArray(s.data) ? s.data : [],
+      goals:     Array.isArray(g.data) ? g.data : [],
+      vocab:     Array.isArray(v.data) ? v.data : [],
+      bucket:    Array.isArray(b.data) ? b.data : [],
+      journal:   Array.isArray(j.data) ? j.data : [],
+      meals:     Array.isArray(m.data) ? m.data : [],
+      notes:     Array.isArray(n.data) ? n.data : [],
     });
   }).finally(() => setLoading(false));
 }, []);

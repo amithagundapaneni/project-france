@@ -25,7 +25,7 @@ export default function Checklist() {
   const fetchItems = async () => {
     try {
       const { data } = await axios.get('/api/checklist');
-      setItems(data);
+      setItems(Array.isArray(data) ? data : []);
     } catch { addToast('Failed to load checklist', 'error'); }
     finally { setLoading(false); }
   };
